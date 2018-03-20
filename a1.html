@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Interactions - A-Frame</title>
+    <meta name="description" content="Interactions - A-Frame">
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-teleport-controls@0.2.x/dist/aframe-teleport-controls.min.js"></script>
+<script type="text/javascript">
+  document.querySelector('#blockHand').addEventListener(`click`, function (evt) {
+  // Create a blank entity.
+  var newVoxelEl = document.createElement('a-entity');
+
+  // Use the mixin to make it a voxel.
+  newVoxelEl.setAttribute('mixin', 'voxel');
+
+  // Set the position using intersection point. The `snap` component above which
+  // is part of the mixin will snap it to the closest half meter.
+  newVoxelEl.setAttribute('position', evt.detail.intersection.point);
+
+  // Add to the scene with `appendChild`.
+  this.appendChild(newVoxelEl);
+});
+</script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">  
+        <a-mixin id="voxel"
+       geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5"
+       material="shader: standard"
+       color="#ffff00"
+       snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"></a-mixin>
+      </a-assets>
+
+      <a-text value="Welcome to your new room!" position="-1.5 4 -8" color="#000" scale="1.5 1.5 1.5"></a-text>
+      <a-text value="Apply a new color on walls by hovering over the colored cubes." position="-1.5 3.5 -5" color="#000"></a-text>
+
+      <a-box position="-3 1 -5" rotation="0 90 30" scale="" color="#F44336"
+                  event-set__enter="_event: mouseenter; _target: #bg; color: #F44336">
+      </a-box>
+      <a-box position="-1 2 -5" rotation="0 45 45" scale="0.75 0.75 0.75" color="#2196F3"
+                  event-set__enter="_event: mouseenter; _target: #bg; color: #2196F3">
+      </a-box>
+      <a-box position="2 2 -4" rotation="0 45 30" scale="0.75 0.75 0.75" color="#009688"
+                  event-set__enter="_event: mouseenter; _target: #bg; color: #009688">            
+      </a-box>
+      <a-box position="1 1 -5" rotation="0 70 30" scale="0.9 0.9 0.9" color="#E91E63"
+                  event-set__enter="_event: mouseenter; _target: #bg; color: #E91E63">
+      </a-box>  
+  <a-entity mixin="voxel" position="-1 0 -2"></a-entity>
+
+      <a-sphere position="0 1.25 -5" radius="0.5" color="#EF2D5E"></a-sphere>
+      
+      <a-entity id="teleHand" hand-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
+      <a-entity id="blockHand" hand-controls="right"></a-entity>
+
+      <a-sky id="bg" color="lightblue"></a-sky>
+
+      <a-plane src="#groundTexture" rotation="-90 0 0" width="50" height="50"></a-plane>
+
+      <a-camera>
+        <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
