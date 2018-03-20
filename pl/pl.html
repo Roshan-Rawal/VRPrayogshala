@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Physics Lab</title>
+    <meta name="description" content="Interactions - A-Frame" />
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+<script src="https://unpkg.com/aframe-teleport-controls@0.2.x/dist/aframe-teleport-controls.min.js"></script>
+<script src="https://unpkg.com/aframe-controller-cursor-component@0.2.x/dist/aframe-controller-cursor-component.min.js"></script>
+
+  </head>
+  <body class="a-body ">
+    <a-scene class="fullscreen" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui=""><canvas class="a-canvas" data-aframe-canvas="true" width="375" height="187"></canvas>
+      <a-assets>
+            <a-asset-item id="lab" src="/vr2/pl/pl.gltf"></a-asset-item>
+         
+        <a-mixin id="voxel" geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5" material="shader: standard" color="#ffff00" snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"></a-mixin>
+      <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg" crossorigin="anonymous"></a-assets>
+        <a-entity gltf-model="/vr2/pl/pl.gltf" position="0 -50 0"></a-entity>
+
+      <a-sphere position="45 0 -1" radius="3" scale="2.243 2 3.107" material="color:#32eb61;opacity:0.0" id="ammeter"  event-set__enter="_event: mouseenter; _target: #ammetertext; opacity: 1.0" event-set__exit="_event: mouseleave; _target: #ammetertext; opacity: 0.0">
+      <a-text id="ammetertext" value="Ammeter" position="-5 0 -5" rotation="0 -90 0" opacity="0.0" color="#f00" scale="5 5 5"></a-text>
+      </a-sphere>
+
+
+      <a-sphere position="40 0 60" radius="3" scale="5 2 3.107" material="color:#32eb61;opacity:0.0" id="rstat"  event-set__enter="_event: mouseenter; _target: #rstattext; opacity: 1.0" event-set__exit="_event: mouseleave; _target: #rstattext; opacity: 0.0">
+      <a-text id="rstattext" value="Rheostat" position="-5 0 5" rotation="0 -50 0" opacity="0.0" color="#f00" scale="5 5 5"></a-text>
+      </a-sphere>
+
+<a-text value="Welcome to VR Lab!" position="-15 5 0" color="#000" scale="10 10 10"></a-text>
+
+      <a-entity id="teleHand" hand-controls="" teleport-controls="collisionEntities:[mixin='voxel'], #ground" vive-controls="model:false;rotationOffset:90" oculus-touch-controls="model:false;rotationOffset:90" windows-motion-controls="hand:left;model:false"></a-entity>
+<a-entity id="blockHand" hand-controls="right" controller-cursor="" intersection-spawn="event: click; mixin: voxel" raycaster="near:0.03" vive-controls="hand:right;model:false;rotationOffset:-90" oculus-touch-controls="hand:right;model:false;rotationOffset:-90" windows-motion-controls="model:false"></a-entity>
+
+      <a-sky id="bg" color="lightblue" material="" geometry=""></a-sky>
+
+
+      <a-camera position="-12 15 0" rotation="-1.4896902673401413 -0.2291831180523315 0" camera="" look-controls="" wasd-controls="" data-aframe-inspector-original-camera="">
+        <a-cursor intersection-spawn="event: click; mixin: voxel" material="" raycaster="" cursor="" geometry=""></a-cursor>
+      </a-camera>
+    <a-entity class="teleportRay" visible="false"></a-entity><a-entity class="hitEntity" visible="false"><a-entity geometry="primitive:torus;radius:0.25;radiusTubular:0.01" rotation="90 0 0" material="shader:flat;color:#99ff99;side:double;depthTest:false"></a-entity><a-entity position="0 0.15 0" geometry="primitive:cylinder;segmentsHeight:1;radius:0.25;height:0.3;openEnded:true" ></a-entity></a-entity></a-scene>  
+
+</body></html>
