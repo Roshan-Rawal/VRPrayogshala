@@ -3,7 +3,7 @@
 It is a central portal to get hands on experience of students labs practicals by virtual reality. I did this project in Rajasthan Hackathon at jaipur. By this any students can get hands on experience of practicals from any where at any time. 
 
 Current Problem:
- There are total 113 million students in government school(2017) out of 315 million students in india.
+There are total 113 million students in government school(2017) out of 315 million students in india.
 
  Very few schools have Practical labs and required equipments and resources.
 
